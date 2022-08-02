@@ -49,4 +49,4 @@ io.of("planter").on("connection", (socket) => {
   socket.on("getCommand", (args) => getCommand(args, socket));
 });
 
-httpServer.listen(8000);
+httpServer.listen(4000);
