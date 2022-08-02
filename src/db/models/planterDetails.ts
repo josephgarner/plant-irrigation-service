@@ -36,6 +36,16 @@ const planterDetailsSchema = new mongoose.Schema({
     default: null,
     required: false,
   },
+  lastOnline: {
+    type: Date,
+    default: new Date(),
+    required: false,
+  },
+  dateCreated: {
+    type: Date,
+    default: new Date(),
+    required: false,
+  },
 });
 
 planterDetailsSchema.statics.build = (attr: PlanterDetails) => {

@@ -20,12 +20,12 @@ const commandQueueSchema = new mongoose.Schema({
     default: false,
     required: false,
   },
-  dateCreated: {
+  updatedLast: {
     type: Date,
     required: true,
     default: new Date(),
   },
-  dateUpdated: {
+  dateCreated: {
     type: Date,
     required: true,
     default: new Date(),
