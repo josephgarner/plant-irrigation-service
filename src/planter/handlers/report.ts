@@ -8,7 +8,7 @@ export const report = async (data: MoistureData) => {
   clientArray.list().forEach((socket: Socket) => {
     socket.emit(messageType, data);
   });
-  await moistureData.build({ ...data }).save();
+  await moistureData.build({ ...data, dateReceived: new Date() }).save();
 
   const lowerLimit = await planterDetails
     .findOne({ planterID: data.planterID }, "lowerLimit")
