@@ -37,9 +37,7 @@ io.of("dashboard").on("connection", (socket) => {
   socket.on(ClientEvents.IRRIGATION_HISTORY, (args) =>
     irrigationHistory(args, socket)
   );
-  socket.on(ClientEvents.SUMMARY, (args) => {
-    socket.emit(ClientEvents.SUMMARY, summary(args));
-  });
+  socket.on(ClientEvents.SUMMARY, (args) => summary(args, socket));
   socket.on(ClientEvents.COMMANDS, (args) => {
     /* Sends list of recent commands */
   });
@@ -59,7 +57,6 @@ io.of("planter").on("connection", (socket) => {
   socket.on("status", (args) => {
     const data = args as StatusData;
     status(data);
-    io.of("/dashboard").emit(ClientEvents.SUMMARY, summary(data.planterID));
   });
   socket.on("report", (args) => {
     io.of("/dashboard").emit(ClientEvents.REPORT, args as MoistureData);
