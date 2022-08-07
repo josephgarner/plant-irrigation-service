@@ -1,6 +1,7 @@
 export type PlanterDetails = {
   planterID: string;
   online: boolean;
+  lastOnline: Date | null;
   title?: string | null;
   datePlanted?: Date | null;
   upperLimit?: number | null;
@@ -30,11 +31,20 @@ export type CommandQueue = {
   dateUpdated?: Date;
 };
 
-export enum MessageType {
-  IRRIGATION_REPORT = "IRRIGATION_REPORT",
-  IRRIGATION_REPORT_ARRAY = "IRRIGATION_REPORT_ARRAY",
-  PLANTER_SUMMARY = "PLANTER_SUMMARY",
+export enum ClientEvents {
+  PLANTER_LIST = "planter_list",
+  REPORT = "report",
+  IRRIGATION_HISTORY = "irrigation_history",
+  SUMMARY = "summary",
+  COMMANDS = "commands",
+  UPDATE = "update",
+  PLANTS = "plants",
+  SEND_COMMAND = "send_command",
+  BATTERY = "battery",
 }
+
+export enum PlanterEvents {}
+//TODO
 
 export enum CommandType {
   IRRIGATE = "IRRIGATE",

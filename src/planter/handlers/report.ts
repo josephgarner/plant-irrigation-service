@@ -1,13 +1,7 @@
 import { commandQueue, moistureData, planterDetails } from "../../db";
-const clientArray = require("../../clients/connectedClients");
-import { Socket } from "socket.io";
-import { MessageType, MoistureData } from "../../types";
+import { MoistureData } from "../../types";
 
 export const report = async (data: MoistureData) => {
-  const messageType = MessageType.IRRIGATION_REPORT;
-  clientArray.list().forEach((socket: Socket) => {
-    socket.emit(messageType, data);
-  });
   await moistureData.build({ ...data, dateReceived: new Date() }).save();
 
   const lowerLimit = await planterDetails

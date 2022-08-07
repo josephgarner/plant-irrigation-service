@@ -1,6 +1,6 @@
 import { Socket } from "socket.io";
 import { moistureData } from "../../db";
-import { MessageType } from "../../types";
+import { ClientEvents } from "../../types";
 
 export const irrigationHistory = (planterID: string, socket: Socket) => {
   const date = new Date();
@@ -8,5 +8,5 @@ export const irrigationHistory = (planterID: string, socket: Socket) => {
     planterID: planterID,
     dateReceived: { $gte: date.setDate(date.getDate() - 3 * 7) },
   });
-  socket.emit(MessageType.IRRIGATION_REPORT_ARRAY, irrigationHistory);
+  socket.emit(ClientEvents.IRRIGATION_HISTORY, irrigationHistory);
 };
