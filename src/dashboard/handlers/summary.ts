@@ -3,7 +3,7 @@ import { batteryData, moistureData, planterDetails } from "../../db";
 import { ClientEvents } from "../../types";
 import { PlanterSummary } from "../types";
 
-export const summary = async (planterID: string, socket: Socket) => {
+export const summary = async (planterID: string) => {
   const details = await planterDetails.findOne({ planterID: planterID });
   const irrigation = await moistureData.findOne(
     { planterID: planterID },
@@ -24,6 +24,7 @@ export const summary = async (planterID: string, socket: Socket) => {
       irrigating: irrigation != null ? irrigation.irrigating : false,
       lastIrrigated: lastIrrigated != null ? lastIrrigated.dateReceived : null,
     };
-    socket.emit(ClientEvents.SUMMARY, summary);
+    return summary;
   }
+  return null;
 };

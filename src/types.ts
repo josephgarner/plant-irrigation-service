@@ -16,6 +16,11 @@ export type MoistureData = {
   dateReceived?: Date;
 };
 
+export type StatusData = {
+  planterID: string;
+  status: boolean;
+};
+
 export type BatteryData = {
   planterID: string;
   charge: number;

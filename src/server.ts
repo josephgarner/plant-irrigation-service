@@ -10,7 +10,7 @@ import {
   report,
   status,
 } from "./planter";
-import { BatteryData, ClientEvents, MoistureData } from "./types";
+import { BatteryData, ClientEvents, MoistureData, StatusData } from "./types";
 import {
   battery,
   irrigationHistory,
@@ -30,12 +30,6 @@ const io = new Server(httpServer, {
 console.log("ENV:", process.env.NODE_ENV);
 connectToDatabase();
 
-io.on("status", (...args) => {
-  console.log("Hitting status");
-  console.log(args[0], args[1]);
-  status(args[0], args[1] as boolean);
-});
-
 io.of("dashboard").on("connection", (socket) => {
   socket.on(ClientEvents.PLANTER_LIST, () => planterList(socket));
   socket.on(ClientEvents.BATTERY, (args) => battery(args, socket));
@@ -43,7 +37,9 @@ io.of("dashboard").on("connection", (socket) => {
   socket.on(ClientEvents.IRRIGATION_HISTORY, (args) =>
     irrigationHistory(args, socket)
   );
-  socket.on(ClientEvents.SUMMARY, (args) => summary(args, socket));
+  socket.on(ClientEvents.SUMMARY, (args) => {
+    socket.emit(ClientEvents.SUMMARY, summary(args));
+  });
   socket.on(ClientEvents.COMMANDS, (args) => {
     /* Sends list of recent commands */
   });
@@ -60,7 +56,11 @@ io.of("dashboard").on("connection", (socket) => {
 
 io.of("planter").on("connection", (socket) => {
   console.log("Planter Connected");
-  socket.on("status", (...args) => status(args[0], args[1] as boolean));
+  socket.on("status", (args) => {
+    const data = args as StatusData;
+    status(data);
+    io.of("/dashboard").emit(ClientEvents.SUMMARY, summary(data.planterID));
+  });
   socket.on("report", (args) => {
     io.of("/dashboard").emit(ClientEvents.REPORT, args as MoistureData);
     report(args);
