@@ -8,10 +8,10 @@ export const connectToDatabase = async () => {
       console.log("Connected to Database");
     });
     mongoose.connection.on("error", (err) => {
-      console.log(err);
+      console.error(err);
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 
   // console.log(mongoose.connection);

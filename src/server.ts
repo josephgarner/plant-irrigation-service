@@ -17,6 +17,12 @@ import {
   moistureLevel,
   planterList,
   summary,
+  details,
+  update,
+  UpdateProps,
+  sendCommand,
+  SendCommandProps,
+  commandHistory,
 } from "./dashboard";
 
 const app = new Koa();
@@ -38,18 +44,12 @@ io.of("dashboard").on("connection", (socket) => {
     irrigationHistory(args, socket)
   );
   socket.on(ClientEvents.SUMMARY, (args) => summary(args, socket));
-  socket.on(ClientEvents.COMMANDS, (args) => {
-    /* Sends list of recent commands */
-  });
-  socket.on(ClientEvents.PLANTS, (args) => {
-    /* Sends list of Plants */
-  });
-  socket.on(ClientEvents.UPDATE, async () => {
-    /* Updates the editible infomation for a planter */
-  });
-  socket.on(ClientEvents.SEND_COMMAND, () => {
-    /* Sends a command message for the planter to exicute on next wake */
-  });
+  socket.on(ClientEvents.DETAILS, (args) => details(args, socket));
+  socket.on(ClientEvents.COMMANDS, (args) => commandHistory(args, socket));
+  socket.on(ClientEvents.UPDATE, async (args) => update(args as UpdateProps));
+  socket.on(ClientEvents.SEND_COMMAND, (args) =>
+    sendCommand(args as SendCommandProps)
+  );
 });
 
 io.of("planter").on("connection", (socket) => {

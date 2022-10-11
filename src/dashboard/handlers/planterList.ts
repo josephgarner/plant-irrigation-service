@@ -3,6 +3,7 @@ import { planterDetails } from "../../db";
 import { ClientEvents } from "../../types";
 
 export const planterList = async (socket: Socket) => {
+  console.info(`Getting planter list`);
   const planters = await planterDetails.find();
   const list = [];
   if (planters) {
