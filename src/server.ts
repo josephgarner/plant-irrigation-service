@@ -29,12 +29,7 @@ const app = new Koa();
 const httpServer = createServer(app.callback());
 const io = new Server(httpServer, {
   cors: {
-    origin: [
-      "*:*",
-      "http://localhost:3000",
-      "http://has.local.plantirrigationservice:80",
-      "https://has.local.plantirrigationservice:443",
-    ],
+    origin: ["*:*", "http://localhost:3000", "http://has.local:4000"],
   },
 });
 
