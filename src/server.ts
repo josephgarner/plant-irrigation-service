@@ -29,7 +29,12 @@ const app = new Koa();
 const httpServer = createServer(app.callback());
 const io = new Server(httpServer, {
   cors: {
-    origin: ["*:*", "http://localhost:3000", "http://has.local:4000"],
+    origin: [
+      "*:*",
+      "http://localhost:3000",
+      "http://has.local:*",
+      "https://has.local:*",
+    ],
   },
 });
 
