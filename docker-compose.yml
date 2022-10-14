@@ -12,6 +12,8 @@ services:
       - mongoDatabase
     links:
       - mongoDatabase
+    ports:
+      - "4000:4000"
     networks:
       - main-network
 networks:
