@@ -8,6 +8,10 @@ services:
     container_name: PlantIrrigationService
     hostname: has.prod.plant-irrigation-service
     restart: on-failure
+    ports:
+      - "4000:4000"
+    expose:
+      - "4000"
 networks:
   default:
     name: "nginx_default"
