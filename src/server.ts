@@ -70,4 +70,4 @@ io.of("planter").on("connection", (socket) => {
   socket.on("getCommand", (args) => getCommand(args, socket));
 });
 
-httpServer.listen(4000);
+httpServer.listen(80);
