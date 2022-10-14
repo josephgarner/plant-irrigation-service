@@ -32,8 +32,7 @@ const io = new Server(httpServer, {
     origin: [
       "http://localhost:3000",
       "http://has.local:3000",
-      "http://has.local:80",
-      "https://has.local:443",
+      "http://has.local",
     ],
   },
 });
