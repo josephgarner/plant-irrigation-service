@@ -31,8 +31,8 @@ const io = new Server(httpServer, {
   cors: {
     origin: [
       "http://localhost:3000",
-      "http://has.local:3000",
-      "http://has.local.plant-irrigation-service:80",
+      "http://has.local",
+      "http://has.local.plant-irrigation-service",
     ],
   },
 });
