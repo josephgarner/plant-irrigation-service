@@ -10,13 +10,11 @@ services:
     restart: on-failure
     depends_on:
       - mongoDatabase
-    links:
-      - mongoDatabase
     ports:
       - "4000:4000"
     networks:
       - main-network
 networks:
   default:
-    name: "PlantIrrigationService"
+    name: "nginx_default"
     external: true
