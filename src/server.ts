@@ -30,10 +30,10 @@ const httpServer = createServer(app.callback());
 const io = new Server(httpServer, {
   cors: {
     origin: [
-      "*:*",
       "http://localhost:3000",
-      "http://has.local:*",
-      "https://has.local:*",
+      "http://has.local:3000",
+      "http://has.local:80",
+      "https://has.local:443",
     ],
   },
 });
