@@ -41,6 +41,7 @@ export enum ClientEvents {
   REPORT = "report",
   IRRIGATION_HISTORY = "irrigation_history",
   SUMMARY = "summary",
+  DETAILS = "details",
   COMMANDS = "commands",
   UPDATE = "update",
   PLANTS = "plants",
