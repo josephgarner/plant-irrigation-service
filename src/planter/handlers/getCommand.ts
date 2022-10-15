@@ -3,6 +3,7 @@ import { commandQueue, planterDetails } from "../../db";
 import { CommandType } from "../../types";
 
 export const getCommand = async (planterID: string, socket: Socket) => {
+  console.info(`Getting command for - ${planterID}`);
   const command = await commandQueue.findOneAndUpdate(
     {
       planterID: planterID,
@@ -11,6 +12,9 @@ export const getCommand = async (planterID: string, socket: Socket) => {
     { $set: { sent: true, dateUpdated: new Date() } }
   );
   if (command) {
+    console.info(
+      `found command for ${planterID} sending - ${command.issuedCommand}`
+    );
     if (command.issuedCommand === CommandType.IRRIGATE_MAX) {
       const details = await planterDetails.findOne({ planterID: planterID });
       if (details.upperLimit) {
